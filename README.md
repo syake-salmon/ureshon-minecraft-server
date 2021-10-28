@@ -1,1 +1,1 @@
-[See Wiki](../../Wiki)
+[Wiki](../../Wiki)をみてね
