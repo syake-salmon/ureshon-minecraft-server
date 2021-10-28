@@ -1,1 +1,1 @@
-# ureshon-minecraft-server
+[See Wiki](../../Wiki)
