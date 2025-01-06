@@ -1,0 +1,15 @@
+[Unit]
+Description=Minecraft server
+After=network-online.target
+
+[Service]
+Type=forking
+User=minecraft
+Group=minecraft
+WorkingDirectory=/opt/minecraft
+ExecStart=screen -r minecraft -d -m java -Xms8G -Xmx8G -jar /opt/minecraft/paper.jar nogui
+ExecStop=screen -r minecraft -X stuff 'stop^M'
+Restart=always
+
+[Install]
+WantedBy = multi-user.target
