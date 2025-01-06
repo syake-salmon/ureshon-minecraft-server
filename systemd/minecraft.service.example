@@ -7,7 +7,7 @@ Type=forking
 User=minecraft
 Group=minecraft
 WorkingDirectory=/opt/minecraft
-ExecStart=screen -S minecraft -m java -Xms8G -Xmx8G -jar /opt/minecraft/paper.jar nogui
+ExecStart=screen -S minecraft -d -m java -Xms8G -Xmx8G -jar /opt/minecraft/paper.jar nogui
 ExecStop=screen -S minecraft -X stuff 'stop^M'
 Restart=always
 
