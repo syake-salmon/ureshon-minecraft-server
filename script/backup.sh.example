@@ -1,0 +1,27 @@
+#!/bin/sh
+WORKDIR=/opt/minecraft
+TARGET_WORLDS=world-survival
+
+# サービス停止
+systemctl stop minecraft.service
+
+# バックアップ処理
+echo "Changing work dir... (${WORKDIR})"
+cd ${WORKDIR}
+
+worlds=${TARGET_WORLDS//,/}
+echo "Backup target worlds are detected. (${worlds})"
+
+ymd=$(date +"%Y%m%d")
+
+for w in "${worlds}"
+do
+  echo "Creating backup of ${w}."
+  su minecraft -c "git add ${w}/ ${w}_nether/ ${w}_the_end/" &>/dev/null
+  su minecraft -c "git commit -m 'backup ${ymd}'" &>/dev/null
+  su minecraft -c "git push origin main" &>/dev/null
+  echo "Backup completed. (${w})"
+done
+
+# サービス起動
+systemctl start minecraft.service
